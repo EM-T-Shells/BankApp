@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDaoImpl implements UserDao {
+public class SqliteUserDao implements UserDao {
 
     @Override
     public User createUser(User newUserCredentials) {
