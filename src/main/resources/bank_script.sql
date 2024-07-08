@@ -1,0 +1,14 @@
+DROP TABLE IF EXISTS Users;
+CREATE TABLE Users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT NOT NULL UNIQUE,
+    password TEXT NOT NULL
+);
+
+DROP TABLE IF EXISTS CheckingAccounts;
+CREATE TABLE CheckingAccounts (
+    account_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER,
+    balance NUMERIC NOT NULL,
+    FOREIGN KEY(user_id) REFERENCES Users(id)
+);

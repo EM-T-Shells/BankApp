@@ -1,13 +1,13 @@
-package com.revature.database;
+package com.revature.utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseManager {
-    private static final String URL = "jdbc:sqlite:bankapp.db";
+    private static final String URL = "jdbc:sqlite:src/main/resources/bankapp.db";
 
-    public Connection connect(){
+    public static Connection connect(){
         Connection conn = null;
 
         try{
