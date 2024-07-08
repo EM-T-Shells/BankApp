@@ -14,7 +14,7 @@ public class User implements Serializable{
         this.password = password;
     }
 
-    public String getUsername(String username){
+    public String getUsername(){
         return username;
     }
 
@@ -22,7 +22,7 @@ public class User implements Serializable{
         this.username = username;
     }
 
-    public String getPassword(String password){
+    public String getPassword(){
         return password;
     }
 
@@ -35,12 +35,12 @@ public class User implements Serializable{
         if(this == o) return true;
         if(o==null  || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(username, user.username) && Objects.equals(password, user.password);
+        return Objects.equals(getUsername(), user.getUsername()) && Objects.equals(getPassword(), user.getPassword());
     }
 
     @Override
     public int hashCode(){
-        return Objects.hash(username, password);
+        return Objects.hash(getUsername(), getPassword());
     }
 
     @Override
