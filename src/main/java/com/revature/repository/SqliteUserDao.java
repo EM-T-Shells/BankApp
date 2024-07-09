@@ -13,28 +13,27 @@ import java.util.List;
 public class SqliteUserDao implements UserDao {
 
     @Override
-    public User createUser(User newUserCredentials) {
+    public User createUser(User newUserCredentials){
         String sql = "INSERT INTO Users (username, password) VALUES (?, ?)";
 
-        try (Connection conn = DatabaseManager.connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try(Connection conn = DatabaseManager.connect();
+            PreparedStatement pstmt = conn.prepareStatement(sql)){
             pstmt.setString(1, newUserCredentials.getUsername());
             pstmt.setString(2, newUserCredentials.getPassword());
             pstmt.executeUpdate();
             return newUserCredentials;
-        } catch (SQLException e) {
+        }catch (SQLException e){
             System.out.println(e.getMessage());
             return null;
         }
     }
-
     @Override
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
         String sql = "SELECT * FROM Users";
 
-        try (Connection conn = DatabaseManager.connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql);
+        try (Connection connection = DatabaseManager.connect();
+             PreparedStatement pstmt = connection.prepareStatement(sql);
              ResultSet rs = pstmt.executeQuery()) {
 
             while (rs.next()) {
@@ -42,6 +41,7 @@ public class SqliteUserDao implements UserDao {
                 user.setUsername(rs.getString("username"));
                 user.setPassword(rs.getString("password"));
                 users.add(user);
+
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
