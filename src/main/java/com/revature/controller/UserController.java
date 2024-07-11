@@ -20,6 +20,7 @@ public class UserController {
 
     // Entry point method for the application
     public void promptUserForService(Map<String, String> controlMap) {
+        System.out.println();
         System.out.println("Welcome to the BankApp");
         System.out.println("1. Register");
         System.out.println("2. Login");
@@ -33,6 +34,8 @@ public class UserController {
                     break;
                 case "2":
                     controlMap.put("User", login().getUsername());
+                    System.out.println();
+                    System.out.println("Successfully logged in.");
                     break;
                 case "q":
                     System.out.println("Goodbye!");
