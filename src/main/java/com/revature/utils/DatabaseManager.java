@@ -12,7 +12,7 @@ public class DatabaseManager {
 
         try{
             conn = DriverManager.getConnection(URL);
-            System.out.println(3);
+            System.out.println();
             System.out.println("Connection to SQLite has been established =].");
         }catch (SQLException e){
             System.out.println(e.getMessage());

@@ -1,4 +1,4 @@
-package com.revature.main;
+package com.revature;
 
 import com.revature.controller.UserController;
 import com.revature.repository.SqliteUserDao;
