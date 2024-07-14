@@ -9,4 +9,6 @@ public interface AccountDao {
     Set<Account> getAccountsByUserId(int userId); // Method to retrieve accounts by user ID
     Account getAccountById(int accountId); // Method to retrieve an account by its ID
     boolean updateAccount(Account account); // Method to update an account's details
+    boolean deleteAccountById(int accountId);
+
 }

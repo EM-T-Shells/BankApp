@@ -54,26 +54,4 @@ public class SqliteUserDao implements UserDao {
         }
         return users;
     }
-
-    @Override
-    public User getUserById(int userId) {
-        String sql = "SELECT * FROM Users WHERE id = ?";
-        User user = null;
-
-        try (Connection conn = DatabaseManager.connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, userId);
-            ResultSet rs = pstmt.executeQuery();
-
-            if (rs.next()) {
-                user = new User();
-                user.setId(rs.getInt("id"));
-                user.setUsername(rs.getString("username"));
-                user.setPassword(rs.getString("password"));
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return user;
-    }
 }

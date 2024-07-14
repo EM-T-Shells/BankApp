@@ -53,15 +53,17 @@ public class AccountController {
         System.out.println("New account created: " + newAccount);
     }
 
-    // Method to close an existing checking account
     private void closeAccount(int userId) {
         System.out.print("Enter the account ID to close: ");
         int accountId = scanner.nextInt();
         scanner.nextLine(); // Consume newline
 
-        // Implement logic to close account (not provided in AccountService yet)
-        // For now, we'll just print a placeholder message
-        System.out.println("Account with ID " + accountId + " has been closed. (placeholder)");
+        boolean isClosed = accountService.closeAccount(accountId);
+        if (isClosed) {
+            System.out.println("Account with ID " + accountId + " has been closed.");
+        } else {
+            System.out.println("Failed to close account with ID " + accountId + ". Ensure the account exists and belongs to the user.");
+        }
     }
 
     // Method to view all accounts for the logged-in user

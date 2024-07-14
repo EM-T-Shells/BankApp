@@ -10,8 +10,8 @@ import java.util.Set;
 public class AccountService {
     private final AccountDao accountDao;
 
-    public AccountService() {
-        this.accountDao = new SqliteAccountDao();
+    public AccountService(AccountDao accountDao) {
+        this.accountDao = accountDao;
     }
 
     public Account openCheckingAccount(int userId) {
@@ -32,6 +32,12 @@ public class AccountService {
         }
         return null;
     }
+
+    public boolean closeAccount(int accountId) {
+        return accountDao.deleteAccountById(accountId);
+    }
+
+
 
     public boolean depositMoney(int accountId, BigDecimal amount) {
         // Implement logic to deposit money

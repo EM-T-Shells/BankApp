@@ -15,13 +15,18 @@ public class SqliteAccountDao implements AccountDao {
 
     @Override
     public Account createAccount(Account newAccount) {
-        String sql = "INSERT INTO Accounts (userId, balance) VALUES (?, ?)";
+        String sql = "INSERT INTO CheckingAccounts (user_id, balance) VALUES (?, ?)";
 
         try (Connection conn = DatabaseManager.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, newAccount.getUserId());
             pstmt.setBigDecimal(2, newAccount.getBalance());
             pstmt.executeUpdate();
+
+            ResultSet rs = pstmt.getGeneratedKeys();
+            if(rs.next()){
+                newAccount.setAccountId(rs.getInt(1));
+            }
             return newAccount;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -32,7 +37,7 @@ public class SqliteAccountDao implements AccountDao {
     @Override
     public Set<Account> getAccountsByUserId(int userId) {
         Set<Account> accounts = new HashSet<>();
-        String sql = "SELECT * FROM Accounts WHERE userId = ?";
+        String sql = "SELECT * FROM CheckingAccounts WHERE user_id = ?";
 
         try (Connection conn = DatabaseManager.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -41,8 +46,8 @@ public class SqliteAccountDao implements AccountDao {
 
             while (rs.next()) {
                 Account account = new Account();
-                account.setAccountId(rs.getInt("accountId"));
-                account.setUserId(rs.getInt("userId"));
+                account.setAccountId(rs.getInt("id"));
+                account.setUserId(rs.getInt("user_id"));
                 account.setBalance(rs.getBigDecimal("balance"));
                 accounts.add(account);
             }
@@ -54,7 +59,7 @@ public class SqliteAccountDao implements AccountDao {
 
     @Override
     public Account getAccountById(int accountId) {
-        String sql = "SELECT * FROM Accounts WHERE accountId = ?";
+        String sql = "SELECT * FROM CheckingAccounts WHERE id = ?";
         Account account = null;
 
         try (Connection conn = DatabaseManager.connect();
@@ -64,8 +69,8 @@ public class SqliteAccountDao implements AccountDao {
 
             if (rs.next()) {
                 account = new Account();
-                account.setAccountId(rs.getInt("accountId"));
-                account.setUserId(rs.getInt("userId"));
+                account.setAccountId(rs.getInt("id"));
+                account.setUserId(rs.getInt("user_id"));
                 account.setBalance(rs.getBigDecimal("balance"));
             }
         } catch (SQLException e) {
@@ -76,7 +81,7 @@ public class SqliteAccountDao implements AccountDao {
 
     @Override
     public boolean updateAccount(Account account) {
-        String sql = "UPDATE Accounts SET balance = ? WHERE accountId = ?";
+        String sql = "UPDATE CheckingAccounts SET balance = ? WHERE id = ?";
 
         try (Connection conn = DatabaseManager.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -89,5 +94,21 @@ public class SqliteAccountDao implements AccountDao {
             return false;
         }
     }
+
+    @Override
+    public boolean deleteAccountById(int accountId) {
+        String sql = "DELETE FROM CheckingAccounts WHERE id = ?";
+        try (Connection conn = DatabaseManager.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, accountId);
+            int affectedRows = pstmt.executeUpdate();
+            return affectedRows > 0;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+
+
 }
 
