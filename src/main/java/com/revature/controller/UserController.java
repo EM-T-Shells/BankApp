@@ -3,6 +3,7 @@ package com.revature.controller;
 import com.revature.entity.User;
 import com.revature.exception.LoginFail;
 import com.revature.service.UserService;
+import com.revature.controller.AccountController;
 
 import java.util.Map;
 import java.util.Scanner;
@@ -11,11 +12,13 @@ public class UserController {
 
     private final Scanner scanner;
     private final UserService userService;
+    private final AccountController accountController;
 
     // Constructor to initialize scanner and userService
-    public UserController(Scanner scanner, UserService userService) {
+    public UserController(Scanner scanner, UserService userService, AccountController accountController) {
         this.scanner = scanner;
         this.userService = userService;
+        this.accountController = accountController;
     }
 
     // Entry point method for the application
@@ -33,9 +36,10 @@ public class UserController {
                     registerNewUser();
                     break;
                 case "2":
-                    controlMap.put("User", login().getUsername());
-                    System.out.println();
-                    System.out.println("Successfully logged in.");
+                    User loggedInUser = login();
+                    controlMap.put("User", loggedInUser.getUsername());
+                    System.out.println(loggedInUser.getUsername() + " successfully logged in.");
+                    accountController.accountMenu(loggedInUser.getId());
                     break;
                 case "q":
                     System.out.println("Goodbye!");

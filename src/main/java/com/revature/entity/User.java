@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class User implements Serializable{
+    private int id;
     private String username;
     private String password;
 
@@ -12,6 +13,14 @@ public class User implements Serializable{
     public User(String username, String password){
         this.username = username;
         this.password = password;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUsername(){
@@ -31,21 +40,27 @@ public class User implements Serializable{
     }
 
     @Override
-    public boolean equals(Object o){
-        if(this == o) return true;
-        if(o==null  || getClass() != o.getClass()) return false;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(getUsername(), user.getUsername()) && Objects.equals(getPassword(), user.getPassword());
+        return id == user.id &&
+                Objects.equals(username, user.username) &&
+                Objects.equals(password, user.password);
     }
 
     @Override
-    public int hashCode(){
-        return Objects.hash(getUsername(), getPassword());
+    public int hashCode() {
+        return Objects.hash(id, username, password);
     }
 
     @Override
-    public String toString(){
-        return "User{'" + "username=" + username + '\''+ ", password='" + password + '\'' + '}';
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 
 
