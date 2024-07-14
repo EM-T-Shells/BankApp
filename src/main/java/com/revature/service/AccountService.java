@@ -14,13 +14,50 @@ public class AccountService {
         this.accountDao = new SqliteAccountDao();
     }
 
-    public Account openCheckingAccount(int userId, BigDecimal balance){
-        Account newAccount = new Account(userId, balance);
+    public Account openCheckingAccount(int userId) {
+        Account newAccount = new Account(userId);
         return accountDao.createAccount(newAccount);
     }
 
-
-    public Set<Account> getUsersAccounts(int userId){
+    public Set<Account> getUserAccounts(int userId) {
         return accountDao.getAccountsByUserId(userId);
+    }
+
+    public Account getAccountById(int userId, int accountId) {
+        Set<Account> accounts = getUserAccounts(userId);
+        for (Account account : accounts) {
+            if (account.getAccountId() == accountId) {
+                return account;
+            }
+        }
+        return null;
+    }
+
+    public boolean depositMoney(int accountId, BigDecimal amount) {
+        // Implement logic to deposit money
+        // Placeholder logic
+        Account account = accountDao.getAccountById(accountId);
+        if (account != null) {
+            account.setBalance(account.getBalance().add(amount));
+            accountDao.updateAccount(account);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean withdrawMoney(int accountId, BigDecimal amount) {
+        // Implement logic to withdraw money
+        // Placeholder logic
+        Account account = accountDao.getAccountById(accountId);
+        if (account != null) {
+            if (account.getBalance().compareTo(amount) >= 0) {
+                account.setBalance(account.getBalance().subtract(amount));
+                accountDao.updateAccount(account);
+                return true;
+            } else {
+                System.out.println("Insufficient funds.");
+            }
+        }
+        return false;
     }
 }

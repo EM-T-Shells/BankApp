@@ -16,6 +16,11 @@ public class Account implements Serializable {
         this.balance = balance;
     }
 
+    public Account(int userId) {
+        this.userId = userId;
+        this.balance = BigDecimal.ZERO;
+    }
+
     public int getAccountId() {
         return accountId;
     }
