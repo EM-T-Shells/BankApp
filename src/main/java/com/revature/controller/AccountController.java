@@ -21,11 +21,14 @@ public class AccountController {
     // Method to display account management options to the user
     public void accountMenu(int userId) {
         while (true) {
+            System.out.println();
             System.out.println("Account Management Menu:");
-            System.out.println("1. Open a new account");
-            System.out.println("2. Close an existing account");
+            System.out.println();
+            System.out.println("1. Open a new checking account");
+            System.out.println("2. Close a checking account");
             System.out.println("3. View all accounts");
             System.out.println("q. Quit to main menu");
+            System.out.println();
             System.out.print("Choose an option: ");
             String choice = scanner.nextLine();
 
@@ -42,7 +45,9 @@ public class AccountController {
                 case "q":
                     return; // Exit to main menu
                 default:
+                    System.out.println();
                     System.out.println("Invalid option. Please choose again.");
+                    System.out.println();
             }
         }
     }
@@ -51,6 +56,7 @@ public class AccountController {
     private void openAccount(int userId) {
         Account newAccount = accountService.openCheckingAccount(userId);
         System.out.println("New account created: " + newAccount);
+        System.out.println();
     }
 
     private void closeAccount(int userId) {
@@ -61,22 +67,30 @@ public class AccountController {
         boolean isClosed = accountService.closeAccount(accountId);
         if (isClosed) {
             System.out.println("Account with ID " + accountId + " has been closed.");
+            System.out.println();
         } else {
             System.out.println("Failed to close account with ID " + accountId + ". Ensure the account exists and belongs to the user.");
+            System.out.println();
         }
     }
 
-    // Method to view all accounts for the logged-in user
     private void viewAccounts(int userId) {
         Set<Account> accounts = accountService.getUserAccounts(userId);
         if (accounts.isEmpty()) {
             System.out.println("No accounts found for user ID " + userId);
         } else {
             accounts.forEach(account -> System.out.println(account));
-            System.out.print("Enter the account ID to view details: ");
-            int accountId = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
-            viewAccountDetails(userId, accountId);
+            boolean validInput = false;
+            while (!validInput) {
+                System.out.print("Enter the account ID to view details: ");
+                try {
+                    int accountId = Integer.parseInt(scanner.nextLine());
+                    viewAccountDetails(userId, accountId);
+                    validInput = true; // Exit the loop if a valid account ID is entered
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid account ID. Please try again.");
+                }
+            }
         }
     }
 
@@ -91,6 +105,7 @@ public class AccountController {
             System.out.println("Account Details:");
             System.out.println("Account ID: " + account.getAccountId());
             System.out.println("Balance: " + account.getBalance());
+            System.out.println();
             System.out.println("1. Deposit money");
             System.out.println("2. Withdraw money");
             System.out.println("3. Return to account menu");
@@ -122,7 +137,7 @@ public class AccountController {
         scanner.nextLine(); // Consume newline
 
         if (accountService.depositMoney(account.getAccountId(), amount)) {
-            System.out.println("Deposited " + amount + " into account ID " + account.getAccountId() + ".");
+            System.out.println("Deposited $" + amount + " into account ID " + account.getAccountId() + ".");
         } else {
             System.out.println("Deposit failed.");
         }

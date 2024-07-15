@@ -5,7 +5,6 @@ import com.revature.exception.InvalidLength;
 import com.revature.exception.LoginFail;
 import com.revature.exception.UserAlreadyExists;
 import com.revature.service.UserService;
-import com.revature.controller.AccountController;
 
 import java.util.Map;
 import java.util.Scanner;
@@ -23,13 +22,14 @@ public class UserController {
         this.accountController = accountController;
     }
 
-    // Entry point method for the application
     public void promptUserForService(Map<String, String> controlMap) {
         System.out.println();
-        System.out.println("Welcome to the BankApp");
+        System.out.println("Welcome to Gringotts");
+        System.out.println();
         System.out.println("1. Register");
         System.out.println("2. Login");
         System.out.println("q. Exit");
+        System.out.println();
         System.out.print("Choose an option: ");
         try {
             String userActionIndicated = scanner.nextLine();
@@ -41,6 +41,7 @@ public class UserController {
                     User loggedInUser = login();
                     controlMap.put("User", loggedInUser.getUsername());
                     System.out.println(loggedInUser.getUsername() + " successfully logged in.");
+                    System.out.println();
                     accountController.accountMenu(loggedInUser.getId());
                     break;
                 case "q":
@@ -55,12 +56,10 @@ public class UserController {
         }
     }
 
-    // Method to handle new user registration
     public void registerNewUser() {
         try {
             User newCredentials = getUserCredentials();
             User newUser = userService.validateNewCredentials(newCredentials);
-            System.out.println();
             System.out.printf("New account created: %s%n", newUser);
         }catch (UserAlreadyExists | InvalidLength e){
             System.out.println();
@@ -69,12 +68,10 @@ public class UserController {
         }
     }
 
-    // Method to handle user login
     public User login() {
         return userService.checkLoginCredentials(getUserCredentials());
     }
 
-    // Helper method to get user credentials from the console
     public User getUserCredentials() {
         System.out.print("Please enter a username: ");
         String newUsername = scanner.nextLine();
