@@ -43,7 +43,7 @@ public class AccountController {
                     viewAccounts(userId);
                     break;
                 case "q":
-                    return; // Exit to main menu
+                    return;
                 default:
                     System.out.println();
                     System.out.println("Invalid option. Please choose again.");
@@ -94,7 +94,7 @@ public class AccountController {
                 try {
                     int accountId = Integer.parseInt(scanner.nextLine());
                     viewAccountDetails(userId, accountId);
-                    validInput = true; // Exit the loop if a valid account ID is entered
+                    validInput = true;
                 } catch (NumberFormatException e) {
                     System.out.println("Invalid account ID. Please try again.");
                 }
@@ -116,7 +116,7 @@ public class AccountController {
             System.out.println("1. Deposit money");
             System.out.println("2. Withdraw money");
             System.out.println("3. Return to account menu");
-            System.out.println("q. Quit to main menu");
+//            System.out.println("q. Quit to main menu");
             System.out.print("Choose an option: ");
             String choice = scanner.nextLine();
 
@@ -128,20 +128,19 @@ public class AccountController {
                     withdrawMoney(account);
                     break;
                 case "3":
-                    return; // Return to account menu
-                case "q":
-                    return; // Quit to main menu
+                    return;
+//                case "q":
+//                    return;
                 default:
                     System.out.println("Invalid option. Please choose again.");
             }
         }
     }
 
-    // Method to deposit money into an account
     private void depositMoney(Account account) {
         System.out.print("Enter the amount to deposit: ");
         BigDecimal amount = scanner.nextBigDecimal();
-        scanner.nextLine(); // Consume newline
+        scanner.nextLine();
 
         if (accountService.depositMoney(account.getAccountId(), amount)) {
             System.out.println("Deposited $" + amount + " into account ID " + account.getAccountId() + ".");
@@ -150,11 +149,10 @@ public class AccountController {
         }
     }
 
-    // Method to withdraw money from an account
     private void withdrawMoney(Account account) {
         System.out.print("Enter the amount to withdraw: ");
         BigDecimal amount = scanner.nextBigDecimal();
-        scanner.nextLine(); // Consume newline
+        scanner.nextLine();
 
         if (accountService.withdrawMoney(account.getAccountId(), amount)) {
             System.out.println("Withdrew " + amount + " from account ID " + account.getAccountId() + ".");

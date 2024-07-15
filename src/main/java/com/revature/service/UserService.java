@@ -36,7 +36,7 @@ public class UserService {
             boolean passwordMatches = user.getPassword().equals(credentials.getPassword());
             if (usernameMatches && passwordMatches){
                 System.out.println("UserService: Logged in user with ID: " + user.getId());
-                return credentials;
+                return user;
             }
         }
         throw new LoginFail("Credentials are invalid: please try again");

@@ -44,6 +44,8 @@ public class UserController {
                 case "2":
                     User loggedInUser = login();
                     controlMap.put("User", loggedInUser.getUsername());
+                    controlMap.put("userId", String.valueOf(loggedInUser.getId()));
+                    System.out.println("UserController: User logged in with ID: " + loggedInUser.getId());
                     System.out.println(loggedInUser.getUsername() + " successfully logged in.");
                     System.out.println();
                     accountController.accountMenu(loggedInUser.getId());
