@@ -2,6 +2,7 @@ package com.revature.controller;
 
 import com.revature.entity.User;
 import com.revature.exception.LoginFail;
+import com.revature.exception.UserAlreadyExists;
 import com.revature.service.UserService;
 import com.revature.controller.AccountController;
 
@@ -55,9 +56,14 @@ public class UserController {
 
     // Method to handle new user registration
     public void registerNewUser() {
-        User newCredentials = getUserCredentials();
-        User newUser = userService.validateNewCredentials(newCredentials);
-        System.out.printf("New account created: %s%n", newUser);
+        try {
+            User newCredentials = getUserCredentials();
+            User newUser = userService.validateNewCredentials(newCredentials);
+            System.out.printf("New account created: %s%n", newUser);
+        }catch (UserAlreadyExists e){
+            System.out.println(e.getMessage());
+            System.out.println("Please try again.");
+        }
     }
 
     // Method to handle user login
