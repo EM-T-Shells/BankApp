@@ -24,11 +24,6 @@ public class Main {
 
         while (Boolean.parseBoolean(controlMap.get("Continue Loop"))) {
             userController.promptUserForService(controlMap);
-
-            if (controlMap.containsKey("userId")) {
-                int userId = Integer.parseInt(controlMap.get("userId"));
-                accountController.accountMenu(userId);
-            }
         }
 
         scanner.close();
