@@ -19,7 +19,9 @@ public class UserService {
     public User validateNewCredentials(User newUserCredentials){
         if (checkUsernamePasswordLength(newUserCredentials)){
             if(checkUsernameIsUnique(newUserCredentials)){
-                return userDao.createUser(newUserCredentials);
+                User createdUser = userDao.createUser(newUserCredentials);
+                System.out.println("UserService: Created user with ID: " + createdUser.getId());
+                return createdUser;
             } else {
                 throw new UserAlreadyExists("Username already taken.");
             }
@@ -33,6 +35,7 @@ public class UserService {
             boolean usernameMatches = user.getUsername().equals(credentials.getUsername());
             boolean passwordMatches = user.getPassword().equals(credentials.getPassword());
             if (usernameMatches && passwordMatches){
+                System.out.println("UserService: Logged in user with ID: " + user.getId());
                 return credentials;
             }
         }

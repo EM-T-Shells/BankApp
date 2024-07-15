@@ -13,7 +13,7 @@ public class DatabaseScriptRunner {
 
     public static void main(String[] args) {
         // Path to the SQL script file
-        Path sqlPath = Paths.get("src/main/resources/bank_setup_reset_script.sql");
+        Path sqlPath = Paths.get("src/main/resources/bank_script.sql");
 
         try {
             try (

@@ -2,7 +2,6 @@ package com.revature.service;
 
 import com.revature.entity.Account;
 import com.revature.repository.AccountDao;
-import com.revature.repository.SqliteAccountDao;
 
 import java.math.BigDecimal;
 import java.util.Set;
@@ -15,6 +14,7 @@ public class AccountService {
     }
 
     public Account openCheckingAccount(int userId) {
+        System.out.println("AccountService: Creating account for userId: " + userId);
         Account newAccount = new Account(userId);
         return accountDao.createAccount(newAccount);
     }
@@ -40,8 +40,6 @@ public class AccountService {
 
 
     public boolean depositMoney(int accountId, BigDecimal amount) {
-        // Implement logic to deposit money
-        // Placeholder logic
         Account account = accountDao.getAccountById(accountId);
         if (account != null) {
             account.setBalance(account.getBalance().add(amount));
@@ -52,8 +50,6 @@ public class AccountService {
     }
 
     public boolean withdrawMoney(int accountId, BigDecimal amount) {
-        // Implement logic to withdraw money
-        // Placeholder logic
         Account account = accountDao.getAccountById(accountId);
         if (account != null) {
             if (account.getBalance().compareTo(amount) >= 0) {

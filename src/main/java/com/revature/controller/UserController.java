@@ -35,7 +35,11 @@ public class UserController {
             String userActionIndicated = scanner.nextLine();
             switch (userActionIndicated) {
                 case "1":
-                    registerNewUser();
+                    User newUser = registerNewUser();
+                    controlMap.put("User", newUser.getUsername());
+                    controlMap.put("userId", String.valueOf(newUser.getId())); // Store userId
+                    System.out.printf("New account created: %s%n", newUser);
+                    accountController.accountMenu(newUser.getId());
                     break;
                 case "2":
                     User loggedInUser = login();
@@ -56,20 +60,25 @@ public class UserController {
         }
     }
 
-    public void registerNewUser() {
+    public User registerNewUser() {
         try {
             User newCredentials = getUserCredentials();
             User newUser = userService.validateNewCredentials(newCredentials);
+            System.out.println("UserController: New account created with ID: " + newUser.getId());
             System.out.printf("New account created: %s%n", newUser);
+            return newUser;
         }catch (UserAlreadyExists | InvalidLength e){
             System.out.println();
             System.out.println(e.getMessage());
             System.out.println("Please try again.");
+            return null;
         }
     }
 
     public User login() {
-        return userService.checkLoginCredentials(getUserCredentials());
+        User loggedInUser = userService.checkLoginCredentials(getUserCredentials());
+        System.out.println("UserController: User logged in with ID: " + loggedInUser.getId());
+        return loggedInUser;
     }
 
     public User getUserCredentials() {

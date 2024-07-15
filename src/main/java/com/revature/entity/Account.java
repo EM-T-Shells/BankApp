@@ -60,7 +60,6 @@ public class Account implements Serializable {
         return Objects.hash(accountId, userId, balance);
     }
 
-    // toString method for readable representation of the object
     @Override
     public String toString() {
         return "Account{" +

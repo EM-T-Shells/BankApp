@@ -54,23 +54,31 @@ public class AccountController {
 
     // Method to open a new checking account
     private void openAccount(int userId) {
+        System.out.println("AccountController: Creating account for userId: " + userId);
         Account newAccount = accountService.openCheckingAccount(userId);
         System.out.println("New account created: " + newAccount);
         System.out.println();
     }
 
     private void closeAccount(int userId) {
-        System.out.print("Enter the account ID to close: ");
-        int accountId = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
-
-        boolean isClosed = accountService.closeAccount(accountId);
-        if (isClosed) {
-            System.out.println("Account with ID " + accountId + " has been closed.");
-            System.out.println();
-        } else {
-            System.out.println("Failed to close account with ID " + accountId + ". Ensure the account exists and belongs to the user.");
-            System.out.println();
+        boolean validInput = false;
+        while(!validInput){
+            System.out.print("Enter the account ID to close: ");
+            String input = scanner.nextLine();
+            try{
+                int accountId = Integer.parseInt(input);
+                boolean isClosed = accountService.closeAccount(accountId);
+                validInput=true;
+                if (isClosed) {
+                    System.out.println("Account with ID " + accountId + " has been closed.");
+                    System.out.println();
+                } else {
+                    System.out.println("Failed to close account with ID " + accountId + ". Ensure the account exists and belongs to the user.");
+                    System.out.println();
+                }
+            } catch (NumberFormatException e){
+                System.out.println("Invalid account ID. Please try again.");
+            }
         }
     }
 
@@ -94,7 +102,6 @@ public class AccountController {
         }
     }
 
-    // Method to view details of a specific account
     private void viewAccountDetails(int userId, int accountId) {
         while (true) {
             Account account = accountService.getAccountById(userId, accountId);

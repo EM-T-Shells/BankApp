@@ -14,10 +14,8 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-
         UserService userService = new UserService(new SqliteUserDao());
         AccountService accountService = new AccountService(new SqliteAccountDao());
-
         AccountController accountController = new AccountController(scanner, accountService);
         UserController userController = new UserController(scanner, userService, accountController);
 
@@ -26,6 +24,11 @@ public class Main {
 
         while (Boolean.parseBoolean(controlMap.get("Continue Loop"))) {
             userController.promptUserForService(controlMap);
+
+            if (controlMap.containsKey("userId")) {
+                int userId = Integer.parseInt(controlMap.get("userId"));
+                accountController.accountMenu(userId);
+            }
         }
 
         scanner.close();
