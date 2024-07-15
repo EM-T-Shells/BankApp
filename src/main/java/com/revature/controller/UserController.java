@@ -1,6 +1,7 @@
 package com.revature.controller;
 
 import com.revature.entity.User;
+import com.revature.exception.InvalidLength;
 import com.revature.exception.LoginFail;
 import com.revature.exception.UserAlreadyExists;
 import com.revature.service.UserService;
@@ -59,8 +60,10 @@ public class UserController {
         try {
             User newCredentials = getUserCredentials();
             User newUser = userService.validateNewCredentials(newCredentials);
+            System.out.println();
             System.out.printf("New account created: %s%n", newUser);
-        }catch (UserAlreadyExists e){
+        }catch (UserAlreadyExists | InvalidLength e){
+            System.out.println();
             System.out.println(e.getMessage());
             System.out.println("Please try again.");
         }

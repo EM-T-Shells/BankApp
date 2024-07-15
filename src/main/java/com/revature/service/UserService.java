@@ -1,6 +1,7 @@
 package com.revature.service;
 
 import com.revature.entity.User;
+import com.revature.exception.InvalidLength;
 import com.revature.exception.LoginFail;
 import com.revature.exception.UserAlreadyExists;
 import com.revature.repository.UserDao;
@@ -23,7 +24,7 @@ public class UserService {
                 throw new UserAlreadyExists("Username already taken.");
             }
         }else {
-            throw new RuntimeException("Username or password length invalid.");
+            throw new InvalidLength("Username or password length invalid.");
         }
     }
 
