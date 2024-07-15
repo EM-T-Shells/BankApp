@@ -2,6 +2,7 @@ package com.revature.service;
 
 import com.revature.entity.User;
 import com.revature.exception.LoginFail;
+import com.revature.exception.UserAlreadyExists;
 import com.revature.repository.UserDao;
 
 import java.util.List;
@@ -18,9 +19,12 @@ public class UserService {
         if (checkUsernamePasswordLength(newUserCredentials)){
             if(checkUsernameIsUnique(newUserCredentials)){
                 return userDao.createUser(newUserCredentials);
+            } else {
+                throw new UserAlreadyExists("Username already taken.");
             }
+        }else {
+            throw new RuntimeException("Username or password length invalid.");
         }
-        throw new RuntimeException("placeholder for custom exception");
     }
 
     public User checkLoginCredentials(User credentials){
