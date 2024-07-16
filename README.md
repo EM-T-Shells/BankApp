@@ -41,7 +41,7 @@ BankApp is a simple console-based bank application built with Java and SQLite. T
    ```
 
 4. **Set up the database**:
-   - The database schema will be initialized via the `DatabaseScriptRunner` class, which will run the SQL script `bank_setup_reset_script.sql` located in the `src/main/resources` directory.
+   - The database schema will be initialized via the `DatabaseScriptRunner` class, which will run the SQL script `bank_script.sql` located in the `src/main/resources` directory.
 
 5. **Run the application**:
    - **Using IntelliJ IDEA**:
