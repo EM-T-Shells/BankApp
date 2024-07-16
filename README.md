@@ -27,7 +27,7 @@ BankApp is a simple console-based bank application built with Java and SQLite. T
 
 1. **Clone the repository**:
    ```sh
-   git clone https://github.com/yourusername/BankApp.git
+   git clone https://github.com/em-t-shells/BankApp.git
    ```
 
 2. **Navigate to the project directory**:
