@@ -1,7 +1,3 @@
-Here's the updated README with a section for future development ideas, including the specified stretch goals:
-
----
-
 # Bank Application
 
 ## Overview
