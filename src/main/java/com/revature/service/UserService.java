@@ -19,9 +19,7 @@ public class UserService {
     public User validateNewCredentials(User newUserCredentials){
         if (checkUsernamePasswordLength(newUserCredentials)){
             if(checkUsernameIsUnique(newUserCredentials)){
-                User createdUser = userDao.createUser(newUserCredentials);
-                System.out.println("UserService: Created user with ID: " + createdUser.getId());
-                return createdUser;
+                return userDao.createUser(newUserCredentials);
             } else {
                 throw new UserAlreadyExists("Username already taken.");
             }

@@ -36,10 +36,11 @@ public class UserController {
             switch (userActionIndicated) {
                 case "1":
                     User newUser = registerNewUser();
-                    controlMap.put("User", newUser.getUsername());
-                    controlMap.put("userId", String.valueOf(newUser.getId())); // Store userId
-                    System.out.printf("New account created: %s%n", newUser);
-                    accountController.accountMenu(newUser.getId());
+                    if (newUser != null) {
+                        controlMap.put("User", newUser.getUsername());
+                        controlMap.put("userId", String.valueOf(newUser.getId()));
+                        accountController.accountMenu(newUser.getId());
+                    }
                     break;
                 case "2":
                     User loggedInUser = login();
