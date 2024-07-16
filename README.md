@@ -1,3 +1,7 @@
+Here's the updated README with a section for future development ideas, including the specified stretch goals:
+
+---
+
 # Bank Application
 
 ## Overview
@@ -9,11 +13,11 @@ BankApp is a simple console-based bank application built with Java and SQLite. T
 - **User Registration**: Users can register with a unique username and password.
 - **User Login**: Existing users can securely log in with their credentials.
 - **Account Management**:
-   - Open a new checking account.
-   - View all accounts associated with the logged-in user.
-   - Deposit money into an account.
-   - Withdraw money from an account.
-   - Close an existing account.
+    - Open a new checking account.
+    - View all accounts associated with the logged-in user.
+    - Deposit money into an account.
+    - Withdraw money from an account.
+    - Close an existing account.
 - **Data Persistence**: All user and account information is stored in a SQLite database.
 
 ## Requirements
@@ -41,37 +45,37 @@ BankApp is a simple console-based bank application built with Java and SQLite. T
    ```
 
 4. **Set up the database**:
-   - The database schema will be initialized via the `DatabaseScriptRunner` class, which will run the SQL script `bank_script.sql` located in the `src/main/resources` directory.
+    - The database schema will be initialized via the `DatabaseScriptRunner` class, which will run the SQL script `bank_script.sql` located in the `src/main/resources` directory.
 
 5. **Run the application**:
-   - **Using IntelliJ IDEA**:
-      1. Open IntelliJ IDEA.
-      2. Open the project by selecting the `BankApp` directory.
-      3. In the Project view, navigate to `src/main/java/com/revature/Main.java`.
-      4. Right-click on `Main.java` and select `Run 'Main.main()'`.
-   - **Using Maven**:
-     ```sh
-     mvn exec:java -Dexec.mainClass="com.revature.Main"
-     ```
+    - **Using IntelliJ IDEA**:
+        1. Open IntelliJ IDEA.
+        2. Open the project by selecting the `BankApp` directory.
+        3. In the Project view, navigate to `src/main/java/com/revature/Main.java`.
+        4. Right-click on `Main.java` and select `Run 'Main.main()'`.
+    - **Using Maven**:
+      ```sh
+      mvn exec:java -Dexec.mainClass="com.revature.Main"
+      ```
 
 ## Usage
 
 Once the application is running, you will see a main menu with options to register, log in, or exit the application.
 
 1. **Register**:
-   - Choose option `1` to register a new user.
-   - Enter a unique username and password (both should not exceed 30 characters).
+    - Choose option `1` to register a new user.
+    - Enter a unique username and password (both should not exceed 30 characters).
 
 2. **Login**:
-   - Choose option `2` to log in with existing credentials.
-   - Enter your username and password.
+    - Choose option `2` to log in with existing credentials.
+    - Enter your username and password.
 
 3. **Account Management**:
-   - After logging in, you will be presented with the account management menu.
-   - Choose from options to open a new account, view all accounts, deposit money, withdraw money, or close an account.
+    - After logging in, you will be presented with the account management menu.
+    - Choose from options to open a new account, view all accounts, deposit money, withdraw money, or close an account.
 
 4. **Exit**:
-   - Choose option `q` to exit the application.
+    - Choose option `q` to exit the application.
 
 ## Directory Structure
 
@@ -104,10 +108,22 @@ src/
 │   │           │   └── DatabaseScriptRunner.java
 │   │           └── Main.java
 │   └── resources/
-│       └── bank_setup_reset_script.sql
+│       └── bank_script.sql
 └── test/
     └── java/
 ```
+
+## Future Development Ideas
+
+### Stretch Goals
+
+- **Create New Account Types with Different Benefits**:
+    - Implement different types of accounts (e.g., savings, business) with unique benefits and rules.
+    - Allow users to choose the type of account they want to open.
+
+- **Implement Joint Account Ownership**:
+    - Enable multiple users to share ownership of a single account.
+    - Implement permissions and roles for joint account holders to manage account access and operations.
 
 ## Contributing
 
@@ -120,3 +136,6 @@ src/
 ## License
 
 This project is licensed under the MIT License. See the LICENSE file for details.
+
+
+
