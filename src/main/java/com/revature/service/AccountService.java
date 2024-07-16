@@ -14,7 +14,7 @@ public class AccountService {
     }
 
     public Account openCheckingAccount(int userId) {
-        System.out.println("AccountService: Creating account for userId: " + userId);
+//        System.out.println("AccountService: Creating account for userId: " + userId);
         Account newAccount = new Account(userId);
         return accountDao.createAccount(newAccount);
     }

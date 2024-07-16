@@ -12,13 +12,11 @@ public class AccountController {
     private final Scanner scanner;
     private final AccountService accountService;
 
-    // Constructor to initialize Scanner and AccountService
     public AccountController(Scanner scanner, AccountService accountService) {
         this.scanner = scanner;
         this.accountService = accountService;
     }
 
-    // Method to display account management options to the user
     public void accountMenu(int userId) {
         while (true) {
             System.out.println();
@@ -52,9 +50,8 @@ public class AccountController {
         }
     }
 
-    // Method to open a new checking account
     private void openAccount(int userId) {
-        System.out.println("AccountController: Creating account for userId: " + userId);
+//        System.out.println("AccountController: Creating account for userId: " + userId);
         Account newAccount = accountService.openCheckingAccount(userId);
         System.out.println("New account created: " + newAccount);
         System.out.println();

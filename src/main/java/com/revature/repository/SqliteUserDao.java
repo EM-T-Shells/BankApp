@@ -24,7 +24,7 @@ public class SqliteUserDao implements UserDao {
 
             ResultSet rs = pstmt.getGeneratedKeys();
             if (rs.next()) {
-                newUserCredentials.setId(rs.getInt(1)); // Set the generated ID
+                newUserCredentials.setId(rs.getInt(1));
             }
             return newUserCredentials;
         } catch (SQLException e) {
@@ -44,7 +44,7 @@ public class SqliteUserDao implements UserDao {
 
             while (rs.next()) {
                 User user = new User();
-                user.setId(rs.getInt("id")); // Set the ID from the database
+                user.setId(rs.getInt("id"));
                 user.setUsername(rs.getString("username"));
                 user.setPassword(rs.getString("password"));
                 users.add(user);

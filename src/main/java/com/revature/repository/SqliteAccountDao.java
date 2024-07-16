@@ -19,7 +19,7 @@ public class SqliteAccountDao implements AccountDao {
 
         try (Connection conn = DatabaseManager.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
-            System.out.println("SqliteAccountDao: userId being set: " + newAccount.getUserId());
+//            System.out.println("SqliteAccountDao: userId being set: " + newAccount.getUserId());
             pstmt.setInt(1, newAccount.getUserId());
             pstmt.setBigDecimal(2, newAccount.getBalance());
             pstmt.executeUpdate();

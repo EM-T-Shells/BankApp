@@ -15,7 +15,6 @@ public class UserController {
     private final UserService userService;
     private final AccountController accountController;
 
-    // Constructor to initialize scanner and userService
     public UserController(Scanner scanner, UserService userService, AccountController accountController) {
         this.scanner = scanner;
         this.userService = userService;
@@ -46,7 +45,7 @@ public class UserController {
                     User loggedInUser = login();
                     controlMap.put("User", loggedInUser.getUsername());
                     controlMap.put("userId", String.valueOf(loggedInUser.getId()));
-                    System.out.println("UserController: User logged in with ID: " + loggedInUser.getId());
+//                    System.out.println("UserController: User logged in with ID: " + loggedInUser.getId());
                     System.out.println(loggedInUser.getUsername() + " successfully logged in.");
                     System.out.println();
                     accountController.accountMenu(loggedInUser.getId());
@@ -67,7 +66,7 @@ public class UserController {
         try {
             User newCredentials = getUserCredentials();
             User newUser = userService.validateNewCredentials(newCredentials);
-            System.out.println("UserController: New account created with ID: " + newUser.getId());
+//            System.out.println("UserController: New account created with ID: " + newUser.getId());
             System.out.printf("New account created: %s%n", newUser);
             return newUser;
         }catch (UserAlreadyExists | InvalidLength e){
@@ -80,7 +79,7 @@ public class UserController {
 
     public User login() {
         User loggedInUser = userService.checkLoginCredentials(getUserCredentials());
-        System.out.println("UserController: User logged in with ID: " + loggedInUser.getId());
+//        System.out.println("UserController: User logged in with ID: " + loggedInUser.getId());
         return loggedInUser;
     }
 
